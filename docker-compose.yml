@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  register-service:
+    container_name: register-service
+    build:
+      context: ./Register_Service
+      dockerfile: dockerfile
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./Register_Service/.env
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+
+  login-service:
+    container_name: login-service
+    build:
+      context: ./Login_Service
+      dockerfile: dockerfile
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    env_file:
+      - ./Login_Service/.env
+    environment:
+      NODE_ENV: production
+      PORT: 3002
